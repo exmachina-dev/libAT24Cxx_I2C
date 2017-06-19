@@ -231,29 +231,6 @@ namespace _AT24CXX_I2C {
          * @endcode
          */
         bool read(const short p_address, unsigned char *p_datas, const int p_length2read = -1);
-
-    
-#if defined(__DEBUG)
-        /** Dump a memory area
-         * 
-         * Note that this method is available only on debug mode
-         * @param p_address The memory address (from 0 to N - 1, N is the number of cells of the memory)
-         * @param p_count The number of bytes toi dump
-         * @return true on success, false otherwise
-         */
-        void DumpMemoryArea(const int p_address, const int p_count);
-        /** For debug purpose only
-         */
-        inline std::string & ToString() { return _internalId; };
-#else // __DEBUG
-        inline void DumpMemoryArea(const int p_address, const int p_count) {};
-#endif // _DEBUG
-        
-    private:
-        /** Internal reference identifier
-         */
-        std::string _internalId;
-
     }; // End of class AT24CXX_I2C
 
 } // End of namespace _AT24CXX_I2C

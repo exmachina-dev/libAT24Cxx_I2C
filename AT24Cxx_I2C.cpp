@@ -17,9 +17,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <iostream>
-#include <sstream>
-
 #include "AT24Cxx_I2C.h"
 
 namespace _AT24CXX_I2C {
