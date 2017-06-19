@@ -121,7 +121,7 @@ namespace _AT24CXX_I2C {
             short baddress = address + b;
             short blength = (length - b) < AT24C_PAGE_SIZE ? length - b : AT24C_PAGE_SIZE;
 #if AT24C_ADDRESS_SIZE == 1
-            char i2cBuffer[blength + 1];
+            char i2cBuffer[AT24C_MAX_BUFFER_LENGTH + 1];
 
             i2cBuffer[0] = (unsigned char)((unsigned char)baddress & 0xff);
             for (short i=0; i<blength; i++)
@@ -129,7 +129,7 @@ namespace _AT24CXX_I2C {
 
             result += _i2c_instance->write(_slaveAddress, i2cBuffer, blength + 1);
 #elif AT24C_ADDRESS_SIZE == 2
-            char i2cBuffer[blength + 2];
+            char i2cBuffer[AT24C_MAX_BUFFER_LENGTH + 2];
 
             i2cBuffer[0] = (unsigned char)(baddress >> 8);
             i2cBuffer[1] = (unsigned char)((unsigned char)baddress & 0xff);
@@ -250,7 +250,7 @@ namespace _AT24CXX_I2C {
             if (_i2c_instance->write(_slaveAddress, i2cBuffer, 2, true) == 0) {
 #endif
 
-                unsigned char buffer[blength];
+                unsigned char buffer[AT24C_MAX_BUFFER_LENGTH];
 
                 result += _i2c_instance->read(_slaveAddress, (char *)buffer, blength);
 

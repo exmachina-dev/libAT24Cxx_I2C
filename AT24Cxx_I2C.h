@@ -31,6 +31,7 @@
 
 #define AT24C_PAGE_SIZE  (128)
 #define AT24C_ADDRESS_SIZE (2)
+#define AT24C_MAX_BUFFER_LENGTH     (25)
 namespace _AT24CXX_I2C {
     /** This class provides simplified I2C access to a Microchip 24LCxx Serial EEPROM device. V0.0.0.3
      *
