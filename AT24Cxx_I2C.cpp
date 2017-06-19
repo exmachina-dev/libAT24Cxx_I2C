@@ -45,7 +45,7 @@ namespace _AT24CXX_I2C {
         // 1.Prepare buffer
         char i2cBuffer[3]; // Memory address + one byte of data
         // 1.1. Memory address
-        short address = p_address + 1; // Index start to 1
+        short address = p_address; // Index start to 1
         i2cBuffer[0] = (unsigned char)(address >> 8);
         i2cBuffer[1] = (unsigned char)((unsigned char)address & 0xff);
         // 1.2. Datas
@@ -63,7 +63,7 @@ namespace _AT24CXX_I2C {
         // 1.Prepare buffer
         char i2cBuffer[4]; // Memory address + one short (2 bytes)
         // 1.1. Memory address
-        short address = p_address + 1; // Index start to 1
+        short address = p_address; // Index start to 1
         i2cBuffer[0] = (unsigned char)(address >> 8);
         i2cBuffer[1] = (unsigned char)((unsigned char)address & 0xff);
         // 1.2. Datas
@@ -87,7 +87,7 @@ namespace _AT24CXX_I2C {
         // 1.Prepare buffer
         char i2cBuffer[6]; // Memory address + one integer (4 bytes)
         // 1.1. Memory address
-        short address = p_address + 1; // Index start to 1
+        short address = p_address; // Index start to 1
         i2cBuffer[0] = (unsigned char)(address >> 8);
         i2cBuffer[1] = (unsigned char)((unsigned char)address & 0xff);
         // 1.2. Datas
