@@ -24,34 +24,20 @@
 
 namespace _AT24CXX_I2C {
 
-    unsigned char AT24CXX_I2C::I2CModuleRefCounter = 0;
-
-    AT24CXX_I2C::AT24CXX_I2C(const PinName p_sda, const PinName p_scl, const unsigned char p_address, const unsigned int p_frequency) : _internalId("") {
-        if (AT24CXX_I2C::I2CModuleRefCounter != 0) {
-            error("AT24CXX_I2C: Wrong params");
-        }
-
-        _i2c_instance = new I2C(p_sda, p_scl);
-        AT24CXX_I2C::I2CModuleRefCounter += 1;
+    AT24CXX_I2C::AT24CXX_I2C(I2C *p_i2c_instance, const unsigned char p_address, const unsigned int p_frequency) {
+        _i2c_instance = p_i2c_instance;
 
         _slaveAddress = (p_address << 1) | 0xa0; // Slave address format is: 1 0 1 0 A3 A2 A1 R/W
         _i2c_instance->frequency(p_frequency); // Set the frequency of the I2C interface
     }
 
     AT24CXX_I2C::~AT24CXX_I2C() {
-
-        // Release I2C instance
-        AT24CXX_I2C::I2CModuleRefCounter -= 1;
-        if (AT24CXX_I2C::I2CModuleRefCounter == 0) {
-            delete _i2c_instance;
-            _i2c_instance = NULL;
-        }
-
+        _i2c_instance = NULL;
     }
 
     bool AT24CXX_I2C::erase_memory(const short p_startAddress, const int p_count, const unsigned char p_pattern) {
 
-        unsigned char ebuffer[p_count];
+        unsigned char ebuffer[AT24C_MAX_BUFFER_LENGTH];
         for (int i=0; i<p_count; i++)
             ebuffer[i] = p_pattern;
         return write(p_startAddress, ebuffer, p_count);

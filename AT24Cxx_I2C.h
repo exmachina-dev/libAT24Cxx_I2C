@@ -51,9 +51,6 @@ namespace _AT24CXX_I2C {
      * @author Yann Garcia (Don't hesitate to contact me: garcia.yann@gmail.com)
      */
     class AT24CXX_I2C { // TODO: Add EE Polling for write methods
-        /** Reference counter used to guarentee unicity of the instance of I2C class
-         */
-        static unsigned char I2CModuleRefCounter;
         
         /** Device address input: A0, A1, A2 (Pins <1,3>). See DS21203K/DS21189D - Figure 5-1: Control Byte Format for address format details
          */
@@ -71,8 +68,7 @@ namespace _AT24CXX_I2C {
     public:
         /** Constructor with write Protect command pin wired. Use it to manage the first I2C module on 3.3V or 5V network
          *
-         * @param p_sda: MBed pin for SDA
-         * @param p_scl: MBed pin for SCL
+         * @param p_i2c_instance: bed I2C instance
          * @param p_address: Device address input: A0, A1, A2 (Pins <1,3>)
          * @param p_wp: MBed pin to manage write Protect input. If NC, WP is not managed, default value is NC, not connected
          * @param p_frequency: Frequency of the I2C interface (SCL), default value is 400KHz
@@ -80,7 +76,7 @@ namespace _AT24CXX_I2C {
          * - If A1 and A2 pins are tired to Vdd and A0 is tired to Vss, address shall '00000110'B
          * - If A0 and A1 pins are tired to Vss and A2 is tired to Vdd, address shall '00000100'B
          */
-        AT24CXX_I2C(const PinName p_sda, const PinName p_scl, const unsigned char p_address, const unsigned int p_frequency = 200000);
+        AT24CXX_I2C(I2C *p_i2c_instance, const unsigned char p_address, const unsigned int p_frequency = 200000);
     
         /** Destructor
          */
