@@ -29,7 +29,7 @@
 #define DEBUG_ENTER         (0);
 #define DEBUG_LEAVE         (0);
 
-#define AT24C_PAGE_SIZE  (128)
+#define AT24C_PAGE_SIZE  (25)
 #define AT24C_ADDRESS_SIZE (2)
 #define AT24C_MAX_BUFFER_LENGTH     (25)
 namespace _AT24CXX_I2C {
